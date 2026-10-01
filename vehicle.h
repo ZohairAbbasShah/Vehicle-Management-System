@@ -1,1 +1,1 @@
-//here struct and functuon will nedevlared
+//here struct and functuon will be delivered
