@@ -1,1 +1,13 @@
-// This file will Record maintenance history and Track maintenance costs
+#include <stdio.h>
+#include "vehicle.h"
+#include <string.h>
+
+void addMaintenanceRecord(){
+//we will continue later
+}
+void displayMaintenanceHistory(){
+//we will continue later
+}
+void displayMaintenanceCost(){
+ //we will continue later
+}
