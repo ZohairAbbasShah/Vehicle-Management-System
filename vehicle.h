@@ -1,8 +1,8 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#define File_Name="Vehicle_date.txt"
-#define MAX_VEHICLES 100
+#define File_Name "Vehicle_date.txt"
+#define MAX_VEHICLES 100 
 
 // Vehicle Information
 struct vehicleinfo{
@@ -57,7 +57,7 @@ void displayMaintenanceCost();
 
 // File Handling Functions
 void saveVehicle(struct Vehicle list[],int max );
-void loadVehicle(struct Vehicle list[]);
+int loadVehicle(struct Vehicle list[]);
 
 
 #endif

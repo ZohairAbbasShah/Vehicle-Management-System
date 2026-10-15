@@ -2,9 +2,18 @@
 #include "vehicle.h"
 #include <string.h> 
 
+struct vehicleinfo v;
+
 void add_Vehicle()
 {
-    // We Will Add Information
+    printf("Enter the vehicle registration number : ");
+    scanf("%s", &v.Registration_number);
+    printf("Enter the model : ");
+    scanf("%s", &v.Model);
+    printf("Enter the Brand : ");
+    scanf("%s", &v.Brand);
+    
+    
 
 }
 
