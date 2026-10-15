@@ -1,6 +1,9 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#define File_Name="Vehicle_date.txt"
+#define MAX_VEHICLES 100
+
 // Vehicle Information
 struct vehicleinfo{
     char Registration_number[50];
@@ -29,11 +32,11 @@ struct status{
 
 
 // CRUD Functions
-void add_Vehicle();
-void update_Vehicle();
-void Search_Vehicle();
-void delete_Vehicle();
-void display_Vehicle();
+void add_Vehicle(void);
+void update_Vehicle(void);
+void Search_Vehicle(void);
+void delete_Vehicle(void);
+void display_Vehicle(void);
 
 
 // Owner Functions
@@ -53,7 +56,8 @@ void displayMaintenanceCost();
 
 
 // File Handling Functions
-void saveVehicle();
-void loadVehicle();
+void saveVehicle(struct Vehicle list[],int max );
+void loadVehicle(struct Vehicle list[]);
+
 
 #endif
