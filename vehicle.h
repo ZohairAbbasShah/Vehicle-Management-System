@@ -1,57 +1,54 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#define File_Name "Vehicle_data.txt"
-#define MAX_VEHICLES 100
+#define ADS_FILE   "ads.dat"
+#define MAX_ADS    200
+#define MIN_YEAR   1980
+#define MAX_YEAR   2030
+#define AD_ACTIVE  1
+#define AD_SOLD    2
 
-// Vehicle Information
-struct vehicleinfo{
-    char Registration_number[50];
-    char Model[50];
-    char Brand[50];
-
+struct Ad {
+    int  adId;
+    char sellerName[50];
+    char sellerPhone[20];
+    char brand[30];
+    char model[30];
     int  year;
     int  price;
-    int  mileage;            // km driven
+    int  mileage;
     char fuel[15];
     char transmission[15];
     char city[30];
-    char sellerName[50];
-    char sellerPhone[20];
-    char saleStatus[15];     // Available / Reserved / Sold
+    char description[100];
+    int  status;
 };
 
-// Owner Information
-struct Ownerinfo{
-    int id;
-    char Name[100];
-    int phone_number;
-};
+/* file_handler.c */
+int  loadAds(struct Ad list[]);
+void saveAds(struct Ad list[], int num);
 
-// Maintenance Information
-struct Maintenance{
-    char description[500];
-    int cost;
-    char date[11];
-};
+/* utils.c */
+int  readInt(void);
+void readText(char text[], int size);
+void readNonEmpty(char text[], int size);
+int  readRange(char prompt[], int min, int max);
+int  containsText(char text[], char word[]);
+void chooseFuel(char fuel[]);
+void chooseTransmission(char transmission[]);
+void printAdHeader(void);
+void printAdRow(struct Ad a);
 
-// Vehicle Status
-struct status{
-    char status[50];
-};
+/* vehicle_crud.c: seller side */
+void postAd(void);
+void showMyAds(void);
+void editAd(void);
+void deleteAd(void);
+void markSold(void);
 
-// CRUD Functions
-void add_Vehicle(void);
-void update_Vehicle(void);
-void Search_Vehicle(void);
-void delete_Vehicle(void);
-void display_Vehicle(void);
-void filter_Vehicle(void);      
-void updateStatus(void);        
-int  askNumber(char prompt[], int min, int max);  
-
-// File Handling Functions
-void saveVehicle(struct vehicleinfo list[],int num );
-int loadVehicle(struct vehicleinfo list[]);
+/* vehicle_crud.c: buyer side */
+void browseAds(void);
+void searchAds(void);
+void openAd(void);
 
 #endif
