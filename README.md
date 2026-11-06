@@ -36,87 +36,27 @@ The system works like a small online classifieds website in the console. Sellers
 
 ## ✨ Features
 
-### Seller Side (CRUD)
-- **Create:** Post a vehicle for sale (brand, model, year, price, kilometers, fuel, transmission, city, description)
-- **Read:** View all of my ads
-- **Update:** Edit price, kilometers, city, and description
-- **Delete:** Remove an ad (with confirmation)
-- Mark a vehicle as **Sold**
-- Seller verifies ownership with the phone number used on the ad
+### Seller Side
+- Post a vehicle for sale
+- View my ads
+- Edit an ad
+- Delete an ad
+- Mark a vehicle as sold
 
 ### Buyer Side
 - Browse all vehicles currently for sale
-- Search and filter by:
-  - Brand or model (case-insensitive, partial match)
-  - City
-  - Maximum price
-  - Minimum year
+- Search and filter vehicles
 - View full vehicle details
 - See seller name and phone number to make contact
 
 ### Input Validation
-- Numbers are checked against valid ranges (year, price, kilometers)
+- Numbers are checked against valid ranges
 - Letters typed in place of numbers do not crash the program
 - Required text fields cannot be left empty
-- Fuel type and transmission are chosen from fixed menus
 
 ### File Handling
-- Store ads permanently in a binary file (`ads.dat`)
-- Load previously saved ads when the program starts
-- Ad IDs are generated automatically
-
-## 🗂️ Project Structure
-
-| File | Purpose |
-|---|---|
-| `vehicle.h` | `Ad` structure, constants, and function prototypes |
-| `main.c` | Main menu and program flow |
-| `vehicle_crud.c` | Seller functions (post, view, edit, delete, mark sold) and buyer functions (browse, search, view details) |
-| `file_handler.c` | Loading and saving ads to the file |
-| `utils.c` | Safe input helpers, text search helper, fuel and transmission menus, table printing |
-
-## ▶️ How to Compile and Run
-
-```bash
-gcc main.c vehicle_crud.c file_handler.c utils.c -o marketplace
-./marketplace
-```
-
-On Windows (PowerShell or Command Prompt):
-
-```bash
-gcc main.c vehicle_crud.c file_handler.c utils.c -o marketplace.exe
-marketplace.exe
-```
-
-## 🧭 Menu Overview
-
-```
---- Buy ---
-[1] Browse vehicles for sale
-[2] Search / filter vehicles
---- Sell ---
-[3] Post a vehicle for sale
-[4] My ads
-[5] Edit my ad
-[6] Delete my ad
-[7] Mark my ad as sold
-[0] Exit
-```
-
-## ⚠️ Limitations
-
-- There are no user accounts. Sellers prove ownership by typing the phone number used when posting the ad, which is not secure and is suitable only for a learning project.
-- Maximum of 200 ads can be stored.
-- Data is stored in a binary file, so it cannot be opened in a text editor. Delete `ads.dat` if the `Ad` structure is changed.
-
-## 🚀 Future Improvements
-
-- User registration and login with passwords
-- Admin panel to remove fake ads and view statistics
-- Favorites list for buyers
-- Price offers from buyers to sellers
-- Sorting results by price or year
+- Store records permanently using files
+- Load previously saved records when the program starts
 
 ## 🛠️ Technologies Used
 
