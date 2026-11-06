@@ -17,6 +17,20 @@ static int checkOwner(struct Ad *a) {
     return 1;
 }
 
+struct Ad getAd(int adId) {
+    struct Ad list[MAX_ADS];
+    struct Ad empty;
+    int count, i;
+
+    count = loadAds(list);
+    for (i = 0; i < count; i++) {
+        if (list[i].adId == adId) return list[i];
+    }
+
+    memset(&empty, 0, sizeof(empty));   /* adId 0 = not found */
+    return empty;
+}
+
 /* ================= SELLER SIDE ================= */
 
 /* ---------- CREATE ---------- */
@@ -143,6 +157,7 @@ void deleteAd(void) {
             for (j = i; j < count - 1; j++) list[j] = list[j + 1];
             count--;
             saveAds(list, count);
+            removeAdFavorites(adId);
 
             printf("\n[OK] Ad deleted.\n");
             return;
@@ -251,32 +266,37 @@ void searchAds(void) {
 
 /* Ask which ad to open, then show full details + seller contact */
 void openAd(void) {
-    struct Ad list[MAX_ADS];
-    int count, i, adId;
+    struct Ad ad;
+    int adId, choice;
+    char phone[20];
 
     adId = readRange("\nEnter Ad ID to see details (0 = back): ", 0, 1000000);
     if (adId == 0) return;
 
-    count = loadAds(list);
-
-    for (i = 0; i < count; i++) {
-        if (list[i].adId == adId) {
-            printf("\n=========================================\n");
-            printf("  %s %s (%d)\n", list[i].brand, list[i].model, list[i].year);
-            printf("=========================================\n");
-            printf("Price        : Rs %d\n", list[i].price);
-            printf("Kilometers   : %d km\n", list[i].mileage);
-            printf("Fuel         : %s\n", list[i].fuel);
-            printf("Transmission : %s\n", list[i].transmission);
-            printf("City         : %s\n", list[i].city);
-            printf("Status       : %s\n", list[i].status == AD_SOLD ? "SOLD" : "Available");
-            printf("Description  : %s\n", list[i].description);
-            printf("-----------------------------------------\n");
-            printf("Seller       : %s\n", list[i].sellerName);
-            printf("Phone        : %s\n", list[i].sellerPhone);
-            return;
-        }
+    ad = getAd(adId);
+    if (ad.adId == 0) {
+        printf("[!] Ad not found.\n");
+        return;
     }
 
-    printf("[!] Ad not found.\n");
+    printf("\n=========================================\n");
+    printf("  %s %s (%d)\n", ad.brand, ad.model, ad.year);
+    printf("=========================================\n");
+    printf("Price        : Rs %d\n", ad.price);
+    printf("Kilometers   : %d km\n", ad.mileage);
+    printf("Fuel         : %s\n", ad.fuel);
+    printf("Transmission : %s\n", ad.transmission);
+    printf("City         : %s\n", ad.city);
+    printf("Status       : %s\n", ad.status == AD_SOLD ? "SOLD" : "Available");
+    printf("Description  : %s\n", ad.description);
+    printf("-----------------------------------------\n");
+    printf("Seller       : %s\n", ad.sellerName);
+    printf("Phone        : %s\n", ad.sellerPhone);
+
+    choice = readRange("\n1. Save to favorites   0. Back : ", 0, 1);
+    if (choice == 1) {
+        printf("Enter your phone number: ");
+        readNonEmpty(phone, 20);
+        addFavorite(phone, adId);
+    }
 }

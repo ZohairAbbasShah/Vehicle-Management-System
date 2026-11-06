@@ -5,24 +5,34 @@ int main(void) {
     int choice;
 
     do {
-        printf("\n===== VEHICLE MANAGEMENT SYSTEM =====\n");
-        printf("1. Add vehicle\n");
-        printf("2. Show all vehicles\n");
-        printf("3. Search vehicle\n");
-        printf("4. Update vehicle\n");
-        printf("5. Delete vehicle\n");
-        printf("0. Exit\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
+        printf("\n=========================================\n");
+        printf("        VEHICLE MARKETPLACE\n");
+        printf("     Buy and sell vehicles easily\n");
+        printf("=========================================\n");
+        printf("  --- Buy ---\n");
+        printf("  [1] Browse vehicles for sale\n");
+        printf("  [2] Search / filter vehicles\n");
+        printf("  --- Sell ---\n");
+        printf("  [3] Post a vehicle for sale\n");
+        printf("  [4] My ads\n");
+        printf("  [5] Edit my ad\n");
+        printf("  [6] Delete my ad\n");
+        printf("  [7] Mark my ad as sold\n");
+        printf("  [8] My favorites\n");    
+        printf("  [0] Exit\n");
+        printf("-----------------------------------------\n");
+        choice = readRange("Enter choice: ", 0, 8);
 
         switch (choice) {
-            case 1: add_Vehicle();     break;
-            case 2: display_Vehicle(); break;
-            case 3: Search_Vehicle();  break;
-            case 4: update_Vehicle();  break;
-            case 5: delete_Vehicle();  break;
-            case 0: printf("Goodbye!\n"); break;
-            default: printf("Invalid choice!\n");
+            case 1: browseAds();  break;
+            case 2: searchAds();  break;
+            case 3: postAd();     break;
+            case 4: showMyAds();  break;
+            case 5: editAd();     break;
+            case 6: deleteAd();   break;
+            case 7: markSold();   break;
+            case 8: favoritesMenu(); break;          
+            case 0: printf("\nGoodbye!\n"); break;
         }
     } while (choice != 0);
 

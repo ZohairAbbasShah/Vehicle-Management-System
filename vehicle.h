@@ -1,12 +1,14 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#define ADS_FILE   "ads.dat"
-#define MAX_ADS    200
-#define MIN_YEAR   1980
-#define MAX_YEAR   2030
-#define AD_ACTIVE  1
-#define AD_SOLD    2
+#define ADS_FILE    "ads.dat"
+#define FAV_FILE    "favorites.dat"
+#define MAX_ADS     200
+#define MAX_FAV     300
+#define MIN_YEAR    1980
+#define MAX_YEAR    2030
+#define AD_ACTIVE   1
+#define AD_SOLD     2
 
 struct Ad {
     int  adId;
@@ -24,9 +26,16 @@ struct Ad {
     int  status;
 };
 
+struct Favorite {
+    char phone[20];
+    int  adId;
+};
+
 /* file_handler.c */
 int  loadAds(struct Ad list[]);
 void saveAds(struct Ad list[], int num);
+int  loadFavorites(struct Favorite list[]);
+void saveFavorites(struct Favorite list[], int num);
 
 /* utils.c */
 int  readInt(void);
@@ -45,10 +54,17 @@ void showMyAds(void);
 void editAd(void);
 void deleteAd(void);
 void markSold(void);
+struct Ad getAd(int adId);
 
 /* vehicle_crud.c: buyer side */
 void browseAds(void);
 void searchAds(void);
 void openAd(void);
+
+/* favorites.c */
+void addFavorite(char phone[], int adId);
+void removeFavorite(char phone[]);
+void favoritesMenu(void);
+void removeAdFavorites(int adId);
 
 #endif
